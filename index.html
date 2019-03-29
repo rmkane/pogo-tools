@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="RMKane">
+    <title>Pokémon GO - CP Search</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="js/jquery.utils.js"></script>
+    <script src="js/sort-by.js"></script>
+    <script src="js/variables.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/index.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <link rel="stylesheet" href="css/sticky-footer-navbar.css">
+  </head>
+  <body>
+    <header>
+      <!-- Fixed navbar -->
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">Pokémon GO Tools</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+          </ul>
+          <form class="form-inline mt-2 mt-md-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Begin page content -->
+    <main role="main" class="container">
+      <h1 class="mt-5">Pokémon GO - CP Search</h1>
+      <p class="lead">Calculate the IVs required to reach a specified CP.</p>
+      <p>Fill out the form below.</p>
+      <form id="main-form">
+        <div class="form-group row">
+          <label for="pokemon" class="col-sm-4 col-form-label">Pokémon</label>
+          <div class="col-sm-8">
+            <select class="form-control" id="pokemon" name="pokemon"></select>
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <label for="cp" class="col-sm-4 col-form-label">Combat Power (CP)</label>
+          <div class="col-sm-8">
+            <input type="number" class="form-control" id="cp" name="cp" placeholder="0" value="1500">
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <label for="level" class="col-sm-4 col-form-label">Minimum Level</label>
+          <div class="col-sm-8">
+            <input type="number" class="form-control" id="level" name="level" placeholder="20" value="20">
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <label for="cp" class="col-sm-4 col-form-label">Options</label>
+          <div class="col-sm-8">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="raid" id="raid" name="prioritize-ivs" checked>
+              <label class="form-check-label" for="raid">Min Raid/Research IVs</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="pvp-sort" id="pvp-sort" name="prioritize-pvp" checked>
+              <label class="form-check-label" for="pvp-sort">Prioritize PVP</label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </form>
+      
+      <table class="table table-striped sortable" id="results">
+        <thead>
+          <tr class="align-items-center">
+            <th scope="col">#</th>
+            <th scope="col">Level</th>
+            <th scope="col">Attack</th>
+            <th scope="col">Defense</th>
+            <th scope="col">Stamina</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </main>
+
+    <!-- Fixed footer -->
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">&copy; 2019 rmkane, all rights reserved.</span>
+      </div>
+    </footer>
+  </body>
+</html>
