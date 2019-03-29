@@ -6,18 +6,30 @@
     <meta name="description" content="">
     <meta name="author" content="RMKane">
     <title>Pokémon GO - CP Search</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.14.2/dist/extensions/export/bootstrap-table-export.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.14.2/dist/extensions/multiple-sort/bootstrap-table-multiple-sort.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="js/jquery.utils.js"></script>
     <script src="js/sort-by.js"></script>
     <script src="js/variables.js"></script>
     <script src="js/common.js"></script>
     <script src="js/index.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-    <link rel="stylesheet" href="css/sticky-footer-navbar.css">
+    <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
     <header>
@@ -96,17 +108,19 @@
         </div>
       </form>
       
-      <table class="table table-striped sortable" id="results">
+      <table class="table table-striped" id="results">
+        <!--
         <thead>
           <tr class="align-items-center">
-            <th scope="col">#</th>
-            <th scope="col">Level</th>
-            <th scope="col">Attack</th>
-            <th scope="col">Defense</th>
-            <th scope="col">Stamina</th>
+            <th scope="col" data-sortable="true" data-field="id">#</th>
+            <th scope="col" data-sortable="true" data-field="lvl">Level</th>
+            <th scope="col" data-sortable="true" data-field="atk">Attack</th>
+            <th scope="col" data-sortable="true" data-field="def">Defense</th>
+            <th scope="col" data-sortable="true" data-field="sta">Stamina</th>
           </tr>
         </thead>
         <tbody></tbody>
+        -->
       </table>
     </main>
 

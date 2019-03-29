@@ -26,6 +26,19 @@
     }));
     return this;
   };
+  $.fixBootstrapMultisort = function() {
+    let $button = $('.multi-sort'),
+      $modal = $('div[id^="sortModal_"].modal'),
+      $toolbar = $modal.find('.modal-dialog #toolbar');
+    // Wrap the button in a button group element.
+    $button.addClass('btn-secondary').wrap($('<div>').addClass('btn-group'));
+    // Fix modal title alignment.
+    $modal.find('.modal-dialog .modal-content .modal-header .modal-title').css({ position: 'absolute', lineHeight: 1 });
+    // Fix the icons.
+    $button.find('.fa.glyphicon-sort').removeClass('glyphicon-sort').addClass('fa-sort').css('width', '1em');
+    $toolbar.find('i.glyphicon-plus').removeClass('glyphicon-plus').addClass('fa-plus');
+    $toolbar.find('i.glyphicon-minus').removeClass('glyphicon-minus').addClass('fa-minus');
+  };
 })(jQuery);
 
 function fromHyphenToCamelCase(str) {
