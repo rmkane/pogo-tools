@@ -1,6 +1,8 @@
 var PkmnData = [];
 var $table = null;
 
+const defaultResultsMessage = 'No matching records found';
+
 // https://codeseven.github.io/toastr/demo.html
 toastr.options = {
   "closeButton": false,
@@ -60,9 +62,12 @@ $(() => {
     showMultiSort: true,
     showExport: true,
     buttonsAlign: 'right',
+    formatNoMatches : function() {
+      return defaultResultsMessage
+    }
   });
   $.fixBootstrapMultisort();
-  
+
   // Add listeners
   $('#main-form').on('submit', onSubmit);
   $('#btn-reset').on('click', onReset);
@@ -78,6 +83,12 @@ $(() => {
         textFn : (data => formatName(data)),
         valField : 'templateId'
       });
+      
+      // Enable boostrap-select
+      $('#field-pokemon').selectpicker({
+        liveSearch : true
+      });
+      
       $('#btn-reset').trigger('click');
     }
   });
@@ -85,8 +96,9 @@ $(() => {
 
 function onSubmit(e) {
   e.preventDefault();
-  let results = gatherRecords($(this).formParams());
-  if (results.length === 0) toastr.warning("No results found.", "Warning");
+  let results = gatherRecords($(this).formParams()),
+    hasResults = results.length === 0;
+  if (hasResults) toastr.warning("No results found.", "Warning");
   $table.bootstrapTable('load', results.map((result, row) => Object.assign(result, { id : row + 1 })));
 }
 
@@ -94,4 +106,5 @@ function onReset(e) {
   let $form = $(this).closest('form');
   $table.bootstrapTable('removeAll');
   $form.loadForm(FieldDefaults);
+  $('#field-pokemon').selectpicker('refresh'); // Refresh the select-picker
 }

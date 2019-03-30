@@ -46,3 +46,7 @@ code {
 .form-check {
   padding-left: 0;
 }
+
+#toast-container {
+  top: 60px;
+}
