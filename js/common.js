@@ -47,13 +47,13 @@ function formatName(data) {
   return `${id} ${name} ${form ? '(' + form + ')' : ''}`;
 }
 
-const defaultResultsMessage = 'No matching records found';
+const DefaultResultsMessage = 'No matching records found';
 
 function formatResultsMessage() {
   let pkmn = PkmnData.filter(p => p.templateId === $('#field-pokemon').val())[0];
 
   if (pkmn == null) {
-    return defaultResultsMessage //'<span style="background:red">' + 'Hello World!' + '</span>'
+    return DefaultResultsMessage //'<span style="background:red">' + 'Hello World!' + '</span>'
   }
 
   let atk = pkmn.pokemonSettings.stats.baseAttack,
@@ -61,7 +61,7 @@ function formatResultsMessage() {
     sta = pkmn.pokemonSettings.stats.baseStamina;
 
   return [
-    '<p>' + defaultResultsMessage + '</p>',
+    '<p>' + DefaultResultsMessage + '</p>',
     '<hr/>',
     '<div class="result-hint">',
       LevelHints.map(hint => {

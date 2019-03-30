@@ -103,7 +103,8 @@ function onSubmit(e) {
 
 function onReset(e) {
   let $form = $(this).closest('form');
-  $table.bootstrapTable('removeAll');
-  $form.loadForm(FieldDefaults);
+  $table.bootstrapTable('removeAll'); // Clear the results table.
+  $('tr.no-records-found>td').html(DefaultResultsMessage); // Manually reset the message.
+  $form.loadForm(FieldDefaults); // Load the form with default values.
   $('#field-pokemon').selectpicker('refresh'); // Refresh the select-picker
 }
