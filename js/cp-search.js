@@ -1,8 +1,6 @@
 var PkmnData = [];
 var $table = null;
 
-const defaultResultsMessage = 'No matching records found';
-
 // https://codeseven.github.io/toastr/demo.html
 toastr.options = {
   "closeButton": false,
@@ -63,7 +61,7 @@ $(() => {
     showExport: true,
     buttonsAlign: 'right',
     formatNoMatches : function() {
-      return defaultResultsMessage
+      return formatResultsMessage();
     }
   });
   $.fixBootstrapMultisort();
@@ -90,6 +88,7 @@ $(() => {
       });
       
       $('#btn-reset').trigger('click');
+      //$('#btn-submit').trigger('click'); // Temporary
     }
   });
 });

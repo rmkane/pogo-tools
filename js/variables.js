@@ -32,6 +32,23 @@ const Sorters = {
   ]
 };
 
+const LevelHints = [{
+  level : 15,
+  info  : 'Great League and Research'
+}, {
+  level : 20,
+  info  : 'Raids'
+}, {
+  level : 25,
+  info  : 'Ultra League and Raids (Boosted)'
+}, {
+  level : 35,
+  info  : 'Maximum Wild Spawn'
+}, {
+  level : 40,
+  info  : 'Master League'
+}];
+
 const CombatMultiplers = [
   { level: 1.0,  multiplier : 0.094000000 },
   { level: 1.5,  multiplier : 0.135137432 },

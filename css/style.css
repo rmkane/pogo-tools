@@ -50,3 +50,28 @@ code {
 #toast-container {
   top: 60px;
 }
+
+/** Result area */
+.result-hint {
+  
+}
+.result-hint-row label {
+  display: inline-block;
+  width: 6em;
+  font-weight: bold;
+  text-align: right;
+}
+.result-hint-row label::after {
+  content: ": ";
+}
+.result-hint-row span {
+  display: inline-block;
+  width: 8em;
+  text-align: center;
+}
+.result-hint-info {
+  font-style: italic;
+}
+.result-hint-row {
+  margin: 0.25em auto;
+}

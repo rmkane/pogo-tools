@@ -47,6 +47,37 @@ function formatName(data) {
   return `${id} ${name} ${form ? '(' + form + ')' : ''}`;
 }
 
+const defaultResultsMessage = 'No matching records found';
+
+function formatResultsMessage() {
+  let pkmn = PkmnData.filter(p => p.templateId === $('#field-pokemon').val())[0];
+
+  if (pkmn == null) {
+    return defaultResultsMessage //'<span style="background:red">' + 'Hello World!' + '</span>'
+  }
+
+  let atk = pkmn.pokemonSettings.stats.baseAttack,
+    def = pkmn.pokemonSettings.stats.baseDefense,
+    sta = pkmn.pokemonSettings.stats.baseStamina;
+
+  return [
+    '<p>' + defaultResultsMessage + '</p>',
+    '<hr/>',
+    '<div class="result-hint">',
+      LevelHints.map(hint => {
+        let cpMin = formatNumberWithCommas(calculateCp(hint.level, atk, def, sta, 10, 10, 10)),
+          cpMax = formatNumberWithCommas(calculateCp(hint.level, atk, def, sta, 15, 15, 15));
+        return [
+          '<div class="result-hint-row">',
+            '<div class="result-hint-info">~ ' + hint.info + ' ~</div>',
+            '<label>Level ' + hint.level + '</label><span>' + cpMin + '&nbsp;&ndash;&nbsp;' + cpMax + '</span>',
+          '</div>'
+        ].join('');
+      }).join(''),
+    '</div>'
+  ].join('');
+}
+
 function calculateCp(level, baseAttack, baseDefense, baseStamina, ivAttack, ivDefense, ivStamina) {
   let found = CombatMultiplers.filter(m => m.level === level),
     multipler = found.length === 1 ? found[0].multiplier : 1;
@@ -79,4 +110,17 @@ function formatNumber(value) {
 
 function pad(value, padding) {
   return (padding + value).substr(-padding.length);
+}
+
+function formatNumberWithCommas(value) {
+  let s = value.toString(),
+    d = s.indexOf('.'), // get stuff before the dot
+    s2 = d === -1 ? s : s.slice(0, d);
+  for (let i = s2.length - 3; i > 0; i -= 3) {
+    s2 = s2.slice(0, i) + ',' + s2.slice(i); // insert commas every 3 digits from the right
+  }
+  if (d !== -1) {
+    s2 += s.slice(d); // append fractional part
+  }
+  return s2;
 }
