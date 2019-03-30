@@ -1,6 +1,24 @@
 (function($) {
+  // Convenience functions for converting letter-case
+  const kebabCaseToCamelCase = (s) => s.replace(/-([a-z])/g, g => g[1].toUpperCase());
+  const camelCaseToKebabCase = (s) => s.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+
   $.fn.formParams = function() {
-    return $(this).serializeArray().reduce((query, param) => Object.assign(query, { [fromHyphenToCamelCase(param.name)] : param.value }), {});
+    return $(this).serializeArray().reduce((query, param) => {
+        return Object.assign(query, { [kebabCaseToCamelCase(param.name)] : param.value });
+    }, {});
+  };
+  $.fn.loadForm = function(params) {
+    let $self = this;
+    Object.keys(params).forEach(param => {
+      let $field = $self.find(`*[name="${camelCaseToKebabCase(param)}"]`),
+        val = params[param];
+      if ($field.is(':checkbox')) {
+        $field.prop('checked', val);
+      } else {
+        $field.val(val);
+      }
+    });
   };
   $.fn.populateDropdown = function(data, options) {
     options = options || {};
@@ -40,7 +58,3 @@
     $toolbar.find('i.glyphicon-minus').removeClass('glyphicon-minus').addClass('fa-minus');
   };
 })(jQuery);
-
-function fromHyphenToCamelCase(str) {
-  return str.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
-}

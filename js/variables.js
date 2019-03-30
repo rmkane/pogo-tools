@@ -7,6 +7,14 @@ const PkmnModel = {
   }
 };
 
+const FieldDefaults = {
+  pokemon : 'V0386_POKEMON_DEOXYS_DEFENSE',
+  cp : 1500,
+  level : 20,
+  prioritizeIvs : true,
+  prioritizePvp : true
+};
+
 const Sorters = {
   default : [
     { name : 'cp'  , reverse: true },

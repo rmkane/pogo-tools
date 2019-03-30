@@ -24,13 +24,6 @@ function gatherRecords(query) {
   });
   
   results.sort(sort_by.apply(null, query.prioritizePvp ? Sorters.pvp : Sorters.default));
-  //results.sort((a, b) => {
-  //  let diff = b.cp - a.cp; if (diff !== 0) return diff;
-  //  diff = b.lvl - a.lvl;   if (diff !== 0) return diff;
-  //  diff = b.atk - a.atk;   if (diff !== 0) return diff;
-  //  diff = b.def - a.def;   if (diff !== 0) return diff;
-  //  return b.sta - a.sta;
-  //});
 
   let targetCp = parseInt(query.cp, 10),
     minLevel = parseInt(query.level, 10);

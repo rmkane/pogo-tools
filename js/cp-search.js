@@ -1,4 +1,5 @@
 var PkmnData = [];
+var $table = null;
 
 // https://codeseven.github.io/toastr/demo.html
 toastr.options = {
@@ -25,24 +26,27 @@ var columnConfig = [{
   sortable : true
 }, {
   field: 'lvl',
-  title: 'Level',
+  title: 'LVL',
   sortable : true
 },  {
   field: 'atk',
-  title: 'Attack',
+  title: 'ATK',
   sortable : true
 }, {
   field: 'def',
-  title: 'Defense',
+  title: 'DEF',
   sortable : true
 }, {
   field: 'sta',
-  title: 'Stamina',
+  title: 'STA',
   sortable : true
 }];
 
 $(() => {
-  $('#results').bootstrapTable({
+  $table = $('#results');
+  
+  // Initialize Bootstrap table
+  $table.bootstrapTable({
     columns: columnConfig,
     pagination: true,
     search: true,
@@ -59,23 +63,35 @@ $(() => {
   });
   $.fixBootstrapMultisort();
   
+  // Add listeners
+  $('#main-form').on('submit', onSubmit);
+  $('#btn-reset').on('click', onReset);
+  
+  // Load data
   $.ajax({
     url : 'data/gamemaster.json',
     type: 'GET',
     cache : true,
     success : function(data) {
       PkmnData = filterData(data, PkmnTempPattern, PkmnModel);
-      $('#pokemon').populateDropdown(PkmnData, {
+      $('#field-pokemon').populateDropdown(PkmnData, {
         textFn : (data => formatName(data)),
         valField : 'templateId'
-      }).val('V0386_POKEMON_DEOXYS_DEFENSE');
+      });
+      $('#btn-reset').trigger('click');
     }
   });
-  
-  $('#main-form').on('submit', function(e) {
-    e.preventDefault();
-    let results = gatherRecords($(this).formParams());
-    if (results.length === 0) toastr.warning("No results found.", "Warning");
-    $('#results').bootstrapTable('load', results.map((result, row) => Object.assign(result, { id : row + 1 })));
-  });  
 });
+
+function onSubmit(e) {
+  e.preventDefault();
+  let results = gatherRecords($(this).formParams());
+  if (results.length === 0) toastr.warning("No results found.", "Warning");
+  $table.bootstrapTable('load', results.map((result, row) => Object.assign(result, { id : row + 1 })));
+}
+
+function onReset(e) {
+  let $form = $(this).closest('form');
+  $table.bootstrapTable('removeAll');
+  $form.loadForm(FieldDefaults);
+}
